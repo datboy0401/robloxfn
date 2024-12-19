@@ -34,8 +34,7 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local HomeTab = Window:CreateTab("Home", nil) -- Title, Image
-local MainTab = Window:CreateTab("Main", nil) -- Title, Image
+local PlayerTab = Window:CreateTab("Player", nil) -- Title, Image
 local TeleportTab = Window:CreateTab("Teleports", nil) -- Title, Image
 local MiscTab = Window:CreateTab("Misc", nil) -- Title, Image
 
@@ -46,7 +45,7 @@ Rayfield:Notify({
    Image = nil,
 })
 
-local Slider = HomeTab:CreateSlider({
+local Slider = PlayerTab:CreateSlider({
    Name = "Walk Speed",
    Range = {16, 300},
    Increment = 1,
@@ -59,7 +58,7 @@ local Slider = HomeTab:CreateSlider({
 })
 
 
-local Slider = HomeTab:CreateSlider({
+local Slider = PlayerTab:CreateSlider({
    Name = "Jump Power",
    Range = {50, 300},
    Increment = 1,
@@ -71,11 +70,48 @@ local Slider = HomeTab:CreateSlider({
    end,
 })
 
-local Toggle = MainTab:CreateToggle({
-   Name = "Test",
-   CurrentValue = false,
-   Flag = "Auto", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
+local Button = TeleportTab:CreateButton({
+   Name = "2v2 UF Field",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   end,
+})
 
+local Button = TeleportTab:CreateButton({
+   Name = "2v2 Merry Christmas Field",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "3v3 Santa Field",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "3v3 Let It Snow Field",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = PlayerTab:CreateButton({
+   Name = "Hitbox Increase",
+   CurrentValue = 1
+    Value = 15
+        Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid = (Value)
+   end,
+})
+
+local Button = PlayerTab:CreateButton({
+   Name = "Hitbox Decrease",
+      CurrentValue = 15
+    Value = 1
+    Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid = (Value)
    end,
 })
