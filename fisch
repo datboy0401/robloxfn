@@ -61,16 +61,64 @@ local Slider = HomeTab:CreateSlider({
    end,
 })
 
-local Dropdown = TeleportTab:CreateDropdown({
-   Name = "Select Area",
-   Options = {"Moosewood","Roslit Bay","Ancient Isle","Forsaken Shores","Mushgrove Swamp","Snowcap Island","Sunstone Island","Statue Of Sovereignty","Desolate Deep","Terrapin Island","The Depths","Vertigo"},
-   CurrentOption = {"None"},
-   MultipleOptions = false,
-   Flag = "Teleport", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Options)
-        if (Options) == Roslit Bay then
-                local player = game.Players.LocalPlayer
-                local Roslit Bay == game.Workspace.world.map.Roslit_Bay
-                player.Teleport.Roslit_Bay = true
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Cast",
+   CurrentValue = false,
+   Flag = "Auto1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+local players = game:GetService("Players")
+local vim = game:GetService("VirtualInputManager")
+local run_service = game:GetService("RunService")
+local replicated_storage = game:GetService("ReplicatedStorage")
+local localplayer = players.LocalPlayer
+local playergui = localplayer.PlayerGui
+local StarterGui = game:GetService("StarterGui")
+
+local farm = {reel_tick = nil, cast_tick = nil}; do
+
+    function farm.find_rod()
+        local character = localplayer.Character
+        if not character then return nil end
+
+        for _, tool in ipairs(character:GetChildren()) do
+            if tool:IsA("Tool") and (tool.Name:find("rod") or tool.Name:find("Rod")) then
+                return tool
+            end
+        end
+        return nil
+    end
+
+function farm.cast()
+        local character = localplayer.Character
+        if not character then return end
+
+        local rod = farm.find_rod()
+        if not rod then return end
+
+        -- Instantly cast without cooldown
+        local args = { [1] = 100, [2] = 1 }
+        rod.events.cast:FireServer(unpack(args))
+        farm.cast_tick = 0  -- Reset last cast time
+    end
+
+
+            
+    
+            -- Main loop with rod check, configurable shake speed, and freeze feature
+while task.wait(config.shakeSpeed) do
+    local rod = farm.find_rod() -- Check if player is holding a rod
+    if rod then
+        -- Freeze character if enabled in config
+        if config.FreezeWhileFishing then
+            farm.freeze_character(false)
+        end
+        farm.cast()
+    else
+        -- Unfreeze character when not fishing
+        farm.freeze_character(false)
+    end
+end
+   end,
+})
    end,
 })
