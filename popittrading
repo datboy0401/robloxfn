@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "🏈NFL Universe Football GUI🏈",
+   Name = "🧸Pop It Trading🧸",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "UF Scripts",
+   LoadingTitle = "DatBoy Scripts",
    LoadingSubtitle = "DatBoy0401",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
@@ -35,12 +35,11 @@ local Window = Rayfield:CreateWindow({
 })
 
 local PlayerTab = Window:CreateTab("Player", nil) -- Title, Image
-local TeleportTab = Window:CreateTab("Teleports", nil) -- Title, Image
-local MiscTab = Window:CreateTab("Misc", nil) -- Title, Image
+local MainTab = Window:CreateTab("Main", nil) -- Title, Image
 
 Rayfield:Notify({
    Title = "Script Executed!",
-   Content = "🏈NFL Universe Football GUI🏈",
+   Content = "🧸Pop It Trading🧸",
    Duration = 5,
    Image = nil,
 })
@@ -57,7 +56,6 @@ local Slider = PlayerTab:CreateSlider({
    end,
 })
 
-
 local Slider = PlayerTab:CreateSlider({
    Name = "Jump Power",
    Range = {50, 300},
@@ -70,48 +68,9 @@ local Slider = PlayerTab:CreateSlider({
    end,
 })
 
-local Button = TeleportTab:CreateButton({
-   Name = "2v2 UF Field",
+local Button = MainTab:CreateButton({
+   Name = "duper??",
    Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = TeleportTab:CreateButton({
-   Name = "2v2 Merry Christmas Field",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = TeleportTab:CreateButton({
-   Name = "3v3 Santa Field",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = TeleportTab:CreateButton({
-   Name = "3v3 Let It Snow Field",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = PlayerTab:CreateButton({
-   Name = "Hitbox Increase",
-   CurrentValue = 1
-    Value = 15
-        Callback = function(Value)
-game.Players.LocalPlayer.Character.Humanoid = (Value)
-   end,
-})
-
-local Button = PlayerTab:CreateButton({
-   Name = "Hitbox Decrease",
-      CurrentValue = 15
-    Value = 1
-    Callback = function(Value)
-game.Players.LocalPlayer.Character.Humanoid = (Value)
+        game.Players.LocalPlayer.Items.Beacon.Value = +1000
    end,
 })
